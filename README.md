@@ -1,6 +1,6 @@
 # Catppuccin Userstyles Customizer
 
-Customize your preferred flavors and accent color for [catppuccin/userstyles](https://github.com/catppuccin/userstyles). Generates a JSON file for installing your customized userstyles in Stylus.
+Customize your preferred flavors and accent color for [catppuccin/userstyles](https://github.com/catppuccin/userstyles). Generates a JSON file for installing in Stylus.
 
 ## Development
 
