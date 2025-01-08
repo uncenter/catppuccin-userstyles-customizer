@@ -31,32 +31,23 @@ const darkFlavor = useStorage<FlavorName>('darkFlavor', 'mocha');
 const lightFlavor = useStorage<FlavorName>('lightFlavor', 'latte');
 const accentColor = useStorage<AccentName>('accentColor', 'mauve');
 
-const userstyles = rawUserstylesImport.slice(1) as UserstyleEntry[];
+const [settings, ...userstyles] = rawUserstylesImport as [
+	SettingsEntry,
+	UserstyleEntry,
+];
 
 function createCustomUserstylesImport() {
 	const customSelectedUserstyles = userstyles
 		.filter(({ name }) => get(selectedUserstyles)[name])
 		.map((userstyle) => {
-			const updatedVars = {
-				...userstyle.usercssData.vars,
-				accentColor: { value: get(accentColor) },
-				darkFlavor: { value: get(darkFlavor) },
-				lightFlavor: { value: get(lightFlavor) },
-			};
+			userstyle.usercssData.vars.accentColor.value = get(accentColor);
+			userstyle.usercssData.vars.darkFlavor.value = get(darkFlavor);
+			userstyle.usercssData.vars.lightFlavor.value = get(lightFlavor);
 
-			return {
-				...userstyle,
-				usercssData: {
-					...userstyle.usercssData,
-					vars: updatedVars,
-				},
-			};
+			return userstyle;
 		});
 
-	return JSON.stringify([
-		rawUserstylesImport[0],
-		...customSelectedUserstyles,
-	]);
+	return JSON.stringify([settings, ...customSelectedUserstyles]);
 }
 
 const searchText = ref('');
