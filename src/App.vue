@@ -209,8 +209,9 @@ function download() {
 						v-for="userstyle in userstyles"
 						:key="userstyle.name"
 					>
-						<div
+						<label
 							v-if="getFilteredUserstyles().includes(userstyle)"
+							:for="userstyle.name"
 							class="flex flex-row gap-2 border border-surface0 border-rounded p2 items-center justify-between"
 						>
 							<h2 class="text-xl">
@@ -220,8 +221,10 @@ function download() {
 								type="checkbox"
 								v-model="selectedUserstyles[userstyle.name]"
 								class="size-5"
+								:name="userstyle.name"
+								:id="userstyle.name"
 							/>
-						</div>
+						</label>
 					</template>
 				</div>
 			</div>
